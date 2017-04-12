@@ -79,4 +79,19 @@ public class HotAndColdObservables {
         Thread.sleep(500);
     }
 
+    @Test
+    public void replay() throws InterruptedException {
+        ConnectableObservable<Long> cold = Observable.interval(200, TimeUnit.MILLISECONDS).replay();
+        Subscription s = cold.connect();
+
+        System.out.println("Subscribe first");
+        Subscription s1 = cold.subscribe(i -> System.out.println("First: " + i));
+        Thread.sleep(700);
+        System.out.println("Subscribe second");
+        Subscription s2 = cold.subscribe(i -> System.out.println("Second: " + i));
+        Thread.sleep(500);
+    }
+
+
+
 }
