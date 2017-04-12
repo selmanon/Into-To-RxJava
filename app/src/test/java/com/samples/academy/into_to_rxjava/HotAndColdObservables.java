@@ -92,6 +92,27 @@ public class HotAndColdObservables {
         Thread.sleep(500);
     }
 
+    @Test
+    public void replayWithTake() throws InterruptedException {
+        ConnectableObservable<Long> source = Observable.interval(1000, TimeUnit.MILLISECONDS)
+                .take(5)
+                .replay(2);
 
+        source.connect();
+        Thread.sleep(4500);
+        source.subscribe(System.out::println);
+    }
+
+    @Test
+    public void cache() throws InterruptedException {
+        Observable<Long> obs = Observable.interval(100, TimeUnit.MILLISECONDS)
+                .take(5)
+                .cache();
+
+        Thread.sleep(500);
+        obs.subscribe(i -> System.out.println("First: " + i));
+        Thread.sleep(300);
+        obs.subscribe(i -> System.out.println("Second: " + i));
+    }
 
 }
