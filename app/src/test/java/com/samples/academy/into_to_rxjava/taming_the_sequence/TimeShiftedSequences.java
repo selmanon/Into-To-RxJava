@@ -1,4 +1,4 @@
-package com.samples.academy.into_to_rxjava;
+package com.samples.academy.into_to_rxjava.taming_the_sequence;
 
 import org.junit.After;
 import org.junit.Test;
